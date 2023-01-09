@@ -9,6 +9,7 @@ import { RestOperations } from "./rest-operations";
 import { HttpMessageConverter } from "../converter/http-message-converter";
 import { JsonMessageConverter } from "../converter/json-message-converter";
 import { DefaultErrorHandler } from "../../errors/default-error-handler";
+import structuredClone from '@ungap/structured-clone';
 
 export class RestTemplate implements RestOperations {
     
@@ -26,7 +27,7 @@ export class RestTemplate implements RestOperations {
 
     public async exchange(uri: string, method: HttpMethod, entity?: RequestEntity): Promise<ResponseEntity> {
         const converter = await this.selectWriteConverter(entity?.body);
-        const output = await converter?.write(entity.body) ?? undefined
+        const output = await converter?.write(structuredClone(entity.body)) ?? undefined
 
         const finalHeaders = new Headers();
         entity?.headers?.forEach((value, key) => finalHeaders.append(key, value));

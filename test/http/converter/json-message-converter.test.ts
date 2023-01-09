@@ -1,6 +1,7 @@
 import { format, getUnixTime, isSameDay, isSameHour, parseISO, set } from "date-fns";
 import {DateToStringConverter, JsonMessageConverter, StringToDateConverter} from '../../../src/http/converter';
 import { DATE_TIME_FORMAT_LOCAL_DATE, DATE_TIME_FORMAT_LOCAL_DATETIME, DATE_TIME_FORMAT_LOCAL_TIME } from "../../../src/http/converter/constants";
+import structuredClone from '@ungap/structured-clone';
 
 describe("json message converter", () => {
 
@@ -55,7 +56,7 @@ describe("json message converter", () => {
         }
         
         // Act
-        const result = await converter.write(data)
+        const result = await converter.write(structuredClone(data))
         const json = JSON.parse(result.body as string);
 
         // Assert

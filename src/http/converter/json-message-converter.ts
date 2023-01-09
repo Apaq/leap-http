@@ -1,5 +1,4 @@
 import { HttpMessageConverter } from "./http-message-converter";
-import structuredClone from '@ungap/structured-clone';
 import { DateToStringConverter } from "./date-to-string-converter";
 import { StringToDateConverter } from "./string-to-date-converter";
 import { PropertyMapper } from "./property-mapper";
@@ -33,7 +32,6 @@ export class JsonMessageConverter implements HttpMessageConverter {
     }
 
     write<T>(data: T): Promise<{ headers: Headers, body: BodyInit }> {
-        data = structuredClone(data);
         PropertyMapper.mapValues(this.dateToStringConverter, data);
 
         const headers = new Headers();
