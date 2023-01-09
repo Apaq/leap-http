@@ -27,6 +27,8 @@ export class DateToStringConverter implements ValueConverter<Date, string> {
             console.log('Convert Local Time', key);
             return format(value, DATE_TIME_FORMAT_LOCAL_TIME);
         }
+
+        console.log('Convert iso', key);
         return value.toISOString();
     }
 }
