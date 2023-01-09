@@ -16,12 +16,15 @@ export class DateToStringConverter implements ValueConverter<Date, string> {
         }
 
         if (this.config?.localDateTimeFields?.indexOf(key) >= 0) {
+            console.log('Convert Local Date Time', key);
             return format(value, DATE_TIME_FORMAT_LOCAL_DATETIME);
         }
         if (this.config?.localDateFields?.indexOf(key) >= 0) {
+            console.log('Convert Local Date', key);
             return format(value, DATE_TIME_FORMAT_LOCAL_DATE);
         }
         if (this.config?.localTimeFields?.indexOf(key) >= 0) {
+            console.log('Convert Local Time', key);
             return format(value, DATE_TIME_FORMAT_LOCAL_TIME);
         }
         return value.toISOString();
