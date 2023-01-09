@@ -3,14 +3,9 @@
 <p align="center">
   <b>Leap Http</b> provides a simple Rest Client
   <br>
-  for communicating with <b>REST APIs</b> in <b>a browser</b> & <b>Node.js</b>.</b>
+  for communicating with <b>REST APIs</b> in <b>a browser</b>.</b>
 </p>
 
-<div align="center">
-
-[📖&nbsp; Documentation](https://date-fns.org/docs/Getting-Started/)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[🧑‍💻&nbsp; JavaScript Jobs](https://jobs.date-fns.org/)
-
-</div>
 
 <hr>
 
