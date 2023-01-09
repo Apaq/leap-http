@@ -32,6 +32,7 @@ export class JsonMessageConverter implements HttpMessageConverter {
     }
 
     write<T>(data: T): Promise<{ headers: Headers, body: BodyInit }> {
+        console.log('Writing object to JSON: ', data);
         PropertyMapper.mapValues(this.dateToStringConverter, data);
 
         const headers = new Headers();
