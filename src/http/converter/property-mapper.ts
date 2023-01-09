@@ -4,7 +4,7 @@ export class PropertyMapper {
 
     public static mapValues(converter: ValueConverter<any, any>, object: Object) {
         console.log('Mapping object: ', object, converter);
-        if (!object || !(object instanceof Object)) {
+        if (object == null || typeof(object) !== 'object') {
             console.log('Object not considered an object: ', object, typeof(object));
             return;
         }
