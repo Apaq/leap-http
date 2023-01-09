@@ -25,8 +25,7 @@ describe("json message converter", () => {
 
         // Act
         const result = await converter.read(mockResponse);
-        console.log(parseISO(`1970-01-01T${data.localtime}`), data.localtime);
-
+        
         // Assert
         expect(result.date).toEqual(new Date(data.date));
         expect(result.localdatetime).toEqual(parseISO(data.localdatetime));
