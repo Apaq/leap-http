@@ -4,12 +4,11 @@
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
   "scripts": {
     "test": "jest --collect-coverage",
-    "build": "rollup -c",
-    "publish-lib": "npm run build && npm publish",
-    "publish-beta": "npm run build && npm publish --tag beta",
-    "publish-dryrun": "npm run build && npm publish --dry-run"
+    "build": "npm test && rm -rf dist && rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
