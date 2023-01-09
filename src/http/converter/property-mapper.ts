@@ -26,11 +26,9 @@ export class PropertyMapper {
                 this.mapValues(converter, value);
             }
 
-            console.log('Can convert: ', key, converter.canConvert(key, value));
+            console.log('Can convert: ', key, converter.canConvert(key, value), converter);
             if (converter.canConvert(key, value)) {
                 object[key] = converter.convert(key, value);
-            } else {
-                console.log('Cannot convert: ', key, typeof(value));
             }
 
         }

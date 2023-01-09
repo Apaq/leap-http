@@ -11,6 +11,7 @@ export class DateToStringConverter implements ValueConverter<Date, string> {
     }
 
     convert(key: string, value: Date): string {
+        console.log('Converting: ', key, value);
         if(value == null) {
             return null;
         }
