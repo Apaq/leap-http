@@ -5,16 +5,16 @@ type Error = {
 }
 
 export class DefaultErrorHandler implements ErrorHandler {
-    hasError(response: Response): boolean {
+    hasError(request: Request, response: Response): boolean {
         return !response.ok;
     }
 
-    handleError(response: Response): Promise<void> {
+   async handleError(response: Response): Promise<void> {
         const statusCode = response.status;
         if (statusCode == null || statusCode === 0) {
             throw new Error('Unknown status code retruend from server');
         }
-        return this.doHandleError(response, statusCode);
+        return await this.doHandleError(response, statusCode);
     }
 
     private async doHandleError(response: Response, statusCode: number): Promise<void> {

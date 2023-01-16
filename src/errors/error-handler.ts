@@ -1,5 +1,5 @@
 
 export interface ErrorHandler {
-  hasError(response: Response): boolean;
+  hasError(request: Request, response: Response): boolean;
   handleError(response: Response): Promise<void>;
 }

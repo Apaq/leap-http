@@ -36,7 +36,7 @@ export class RestTemplate implements RestOperations {
         const request = await this.requestFactory.createRequest(uri, method, output?.body, finalHeaders);
         return new Promise<ResponseEntity>((resolve, reject) => {
             this.handleFetch(request)
-                .then(response => this.handleErrors(response))
+                .then(response => this.handleErrors(request, response))
                 .then(response => this.handleData(response))
                 .then(([data, response]) => resolve({headers: response.headers, body: data, status: response.status, statusText: response.statusText}))
                 .catch(error => reject(error));
@@ -89,8 +89,8 @@ export class RestTemplate implements RestOperations {
         }
     }
 
-    private async handleErrors(response: Response): Promise<Response> {
-        const hasError = this.errorHandler.hasError(response);
+    private async handleErrors(request: Request, response: Response): Promise<Response> {
+        const hasError = this.errorHandler.hasError(request, response);
 
         if (hasError) {
             await this.errorHandler.handleError(response);
