@@ -102,7 +102,7 @@ export class RestTemplate implements RestOperations {
     
     private async handleData<D>(response: Response): Promise<[D, Response]> {
         const contentTypeHeader = response.headers.get('content-type');
-        const contentType = contentTypeHeader?.split(';')[0] ?? undefined;
+        const contentType = this.resolvePrimaryContentType(contentTypeHeader);
 
         if(!contentType) {
             return Promise.resolve([null, response]);
@@ -126,6 +126,15 @@ export class RestTemplate implements RestOperations {
         } else {
             return Promise.resolve(converter);
         }
+    }
+
+    private resolvePrimaryContentType(value: string) {
+        let result: string | undefined = undefined;
+        const firstPart = value?.split(';')[0] ?? undefined;
+        if(firstPart) {
+            result = firstPart.split(',')[0];
+        }
+        return result;
     }
 
 }

@@ -41,4 +41,28 @@ describe("passport control", () => {
         expect(result).toEqual('error');
     });
 
+    it("should contenttype header issues correctly", async () => {
+        // Arrange
+        template.errorHandler = {
+            hasError: () => false,
+            handleError: () => {throw Error('')}
+        }
+        fetchMock.mockIf('http://localhost/test', req => {
+            return Promise.resolve({
+                status: 200,
+                body: JSON.stringify({id: '123'}),
+                headers: {
+                    'content-type': 'application/json; application/xml',
+                    'Content-Type': 'application/json'
+                }
+            });
+        });
+
+        // Act
+        const result = await template.getForObject('http://localhost/test') as any;
+        
+        // Assert
+        expect(result.id).toEqual('123');
+    });
+
 });
