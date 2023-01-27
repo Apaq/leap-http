@@ -148,9 +148,9 @@ export class RestTemplate implements RestOperations {
 
     private responseFromError(error: any) {
         if(error instanceof Error) {
-            return new Response(null, {statusText: error.message, status: 0});
+            return new Response(null, {statusText: error.message, status: 501});
         } else {
-            return new Response(null, {statusText: 'Unknown error occured', status: 0});
+            return new Response(null, {statusText: 'Unknown error occured', status: 501});
         }
 
     }
