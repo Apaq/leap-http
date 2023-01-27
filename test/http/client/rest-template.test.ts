@@ -65,4 +65,27 @@ describe("passport control", () => {
         expect(result.id).toEqual('123');
     });
 
+    it("should handle typerror", async () => {
+        // Arrange
+        template.errorHandler = {
+            hasError: (request, response) => !response.ok,
+            handleError: (response) => {throw Error(response.statusText)}
+        }
+        fetchMock.mockIf('http://localhost/test', req => {
+            return Promise.reject(new TypeError('Load failed'));
+        });
+
+        // Act
+        let result: any = undefined;
+                
+        try {
+            await template.exchange('https://localhost/test', 'GET');
+        } catch(error) {
+            result = 'error'
+        }
+
+        // Assert
+        expect(result).toEqual('error');
+    });
+
 });

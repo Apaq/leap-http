@@ -38,7 +38,17 @@ export class RestTemplate implements RestOperations {
                 .then(response => this.handleErrors(request, response))
                 .then(response => this.handleData(response))
                 .then(([data, response]) => resolve({headers: response.headers, body: data, status: response.status, statusText: response.statusText}))
-                .catch(error => reject(error));
+                .catch(async error => {
+                    if(error instanceof TypeError) {
+                        try {
+                            return await this.handleErrors(request, this.responseFromError(error));
+                        } catch (innerError) {
+                            return reject(innerError);
+                        }
+                    } else {
+                        reject(error);
+                    }
+                });
         });
     }
 
@@ -134,6 +144,15 @@ export class RestTemplate implements RestOperations {
             result = firstPart.split(',')[0];
         }
         return result;
+    }
+
+    private responseFromError(error: any) {
+        if(error instanceof Error) {
+            return new Response(null, {statusText: error.message, status: 0});
+        } else {
+            return new Response(null, {statusText: 'Unknown error occured', status: 0});
+        }
+
     }
 
 }
