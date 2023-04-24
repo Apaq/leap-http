@@ -12,13 +12,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Apaq/leap-data-core.git"
+    "url": "git+https://github.com/Apaq/leap-http.git"
   },
   "author": "Apaq",
   "bugs": {
-    "url": "https://github.com/Apaq/leap-data-core/issues"
+    "url": "https://github.com/Apaq/leap-http/issues"
   },
-  "homepage": "https://github.com/Apaq/leap-data-core#readme",
+  "homepage": "https://github.com/Apaq/leap-http#readme",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
